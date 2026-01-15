@@ -3,57 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Launch LibreTube</title>
+    <title>LibreTube Launcher</title>
     <style>
-        body {
-            font-family: sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #121212;
-            color: #ffffff;
-            margin: 0;
-            text-align: center;
-        }
-        .btn {
-            display: block;
-            width: 80%;
-            max-width: 300px;
-            padding: 18px;
-            margin: 10px 0;
-            background-color: #3daee9;
-            color: white;
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .btn-red { background-color: #ff3e3e; }
-        p { padding: 0 20px; color: #aaa; }
+        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: #121212; color: white; margin: 0; }
+        .btn { display: block; width: 280px; padding: 20px; margin: 10px; background: #3daee9; color: white; text-decoration: none; border-radius: 10px; font-weight: bold; text-align: center; }
+        .instructions { font-size: 0.9rem; color: #888; max-width: 300px; text-align: center; margin-top: 20px; }
     </style>
 </head>
 <body>
 
     <h2>LibreTube Opener</h2>
-    <p>If the app doesn't open automatically, try one of the buttons below:</p>
-
-    <a href="intent://www.youtube.com/#Intent;scheme=https;package=com.github.libretube;end" class="btn">
-        Method 1: Open YouTube Link
+    
+    <a href="intent:#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;component=com.github.libretube/com.github.libretube.ui.activities.MainActivity;end" class="btn">
+        Launch LibreTube App
     </a>
 
-    <a href="intent:#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.github.libretube;end" class="btn btn-red">
-        Method 2: Force App Launch
-    </a>
+    <div class="instructions">
+        <b>Note:</b> If you see "broken link," you must enable "Open supported links" in your phone's App settings for LibreTube.
+    </div>
 
     <script>
+        // Auto-launch attempt
         window.onload = function() {
-            // Try Method 1 automatically first
             setTimeout(() => {
-                window.location.href = "intent://www.youtube.com/#Intent;scheme=https;package=com.github.libretube;end";
-            }, 500);
+                window.location.href = "intent:#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;component=com.github.libretube/com.github.libretube.ui.activities.MainActivity;end";
+            }, 1000);
         };
     </script>
 
