@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LibreTube Quick Launcher</title>
-    <!-- Use a modern font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -69,17 +68,20 @@
             margin-bottom: 15px;
             border: none;
             cursor: pointer;
+            outline: none;
         }
 
-        .btn:active { transform: scale(0.95); }
+        .btn:active { transform: scale(0.96); opacity: 0.9; }
 
         .secondary-link {
             color: var(--text-dim);
-            text-decoration: underline;
+            text-decoration: none;
             font-size: 0.8rem;
             background: none;
             border: none;
             cursor: pointer;
+            display: block;
+            margin: 0 auto;
         }
 
         .status-msg {
@@ -99,41 +101,41 @@
             </svg>
         </div>
         <h1>Launch LibreTube</h1>
-        <p>This shortcut will open the LibreTube app directly on your Android device.</p>
+        <p>Tap below to open LibreTube. If the app isn't installed, nothing will happen.</p>
 
-        <!-- Primary Intent Link -->
-        <a id="main-link" href="intent://www.youtube.com/#Intent;scheme=https;package=com.github.libretube;end" class="btn">
-            Open Now
-        </a>
+        <button onclick="launchApp()" class="btn">Open Now</button>
 
-        <!-- Fallback if the button fails -->
         <button onclick="copyPackage()" class="secondary-link">Copy Package Name</button>
         <div id="status" class="status-msg">Copied to clipboard!</div>
     </div>
 
     <script>
-        function copyPackage() {
-            const pkg = "com.github.libretube";
-            const el = document.createElement('textarea');
-            el.value = pkg;
-            document.body.appendChild(el);
-            el.select();
-            document.execCommand('copy');
-            document.body.removeChild(el);
-            
-            document.getElementById('status').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('status').style.display = 'none';
-            }, 2000);
+        // The key is the correct Intent string format
+        const LIBRETUBE_INTENT = "intent://www.youtube.com#Intent;scheme=https;package=com.github.libretube;end";
+
+        function launchApp() {
+            window.location.href = LIBRETUBE_INTENT;
         }
 
-        // Auto-launch attempt on page load
-        window.onload = function() {
-            // Only try auto-launch if we are on a mobile device
-            if (/Android/i.test(navigator.userAgent)) {
+        function copyPackage() {
+            const pkg = "com.github.libretube";
+            navigator.clipboard.writeText(pkg).then(() => {
+                const status = document.getElementById('status');
+                status.style.display = 'block';
                 setTimeout(() => {
-                    window.location.href = "intent://www.youtube.com/#Intent;scheme=https;package=com.github.libretube;end";
-                }, 1000);
+                    status.style.display = 'none';
+                }, 2000);
+            });
+        }
+
+        // Auto-launch only works if the browser allows it (often blocked)
+        window.onload = function() {
+            if (/Android/i.test(navigator.userAgent)) {
+                console.log("Attempting background launch...");
+                // Short delay to allow page render
+                setTimeout(() => {
+                    launchApp();
+                }, 500);
             }
         };
     </script>
