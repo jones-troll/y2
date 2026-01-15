@@ -3,65 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Open LibreTube</title>
+    <title>Launch LibreTube</title>
     <style>
         body {
             font-family: sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #0f0f0f;
-            color: white;
+            background-color: #121212;
+            color: #ffffff;
             margin: 0;
             text-align: center;
         }
-        .container {
-            padding: 2rem;
-            border-radius: 20px;
-            background: #1a1a1a;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-        }
         .btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 15px 35px;
-            background-color: #ff3e3e; /* LibreTube Red */
+            display: block;
+            width: 80%;
+            max-width: 300px;
+            padding: 18px;
+            margin: 10px 0;
+            background-color: #3daee9;
             color: white;
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 12px;
             font-weight: bold;
             font-size: 1.1rem;
-            border: none;
-            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
+        .btn-red { background-color: #ff3e3e; }
+        p { padding: 0 20px; color: #aaa; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>LibreTube Quick-Launch</h2>
-    <p>If the app doesn't open automatically, use the button below:</p>
-    
-    <a href="intent:#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.github.libretube;end" class="btn">
-        Launch LibreTube
-    </a>
-</div>
+    <h2>LibreTube Opener</h2>
+    <p>If the app doesn't open automatically, try one of the buttons below:</p>
 
-<script>
-    // Strategy: Try to launch immediately on page load
-    window.onload = function() {
-        const libreIntent = "intent:#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.github.libretube;end";
-        
-        // Attempt to redirect
-        window.location.replace(libreIntent);
-        
-        // Fallback: If still on page after 2 seconds, the user might need to click manually
-        setTimeout(() => {
-            console.log("Auto-launch might have been blocked by browser.");
-        }, 2000);
-    };
-</script>
+    <a href="intent://www.youtube.com/#Intent;scheme=https;package=com.github.libretube;end" class="btn">
+        Method 1: Open YouTube Link
+    </a>
+
+    <a href="intent:#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.github.libretube;end" class="btn btn-red">
+        Method 2: Force App Launch
+    </a>
+
+    <script>
+        window.onload = function() {
+            // Try Method 1 automatically first
+            setTimeout(() => {
+                window.location.href = "intent://www.youtube.com/#Intent;scheme=https;package=com.github.libretube;end";
+            }, 500);
+        };
+    </script>
 
 </body>
 </html>
