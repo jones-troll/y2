@@ -3,49 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opening YouTube...</title>
+    <title>Opening LibreTube...</title>
     <style>
         body {
-            font-family: sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
+            background-color: #121212; /* Dark mode style */
+            color: white;
             text-align: center;
-            background-color: #f9f9f9;
         }
-        .container {
-            padding: 20px;
-            border-radius: 8px;
-            background: white;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        .card {
+            padding: 30px;
+            border-radius: 15px;
+            background: #1e1e1e;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            max-width: 80%;
         }
-        .button {
+        .btn {
             display: inline-block;
             margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #ff0000;
+            padding: 12px 24px;
+            background-color: #3daee9; /* LibreTube-esque blue */
             color: white;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-weight: bold;
+            transition: background 0.2s;
+        }
+        .btn:active {
+            background-color: #2a7da8;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>Redirecting to YouTube...</h2>
-    <p>If the app doesn't open automatically, click the button below:</p>
-    <a id="yt-link" class="button" href="intent://www.youtube.com/#Intent;scheme=https;package=com.google.android.youtube;end">
-        Open YouTube App
+<div class="card">
+    <h2>Launching LibreTube</h2>
+    <p>Attempting to open the app...</p>
+    <a id="launch-link" class="btn" href="intent://#Intent;scheme=https;package=io.libretube.app;end">
+        Open App Manually
     </a>
 </div>
 
 <script>
     window.onload = function() {
-        // Attempt to trigger the intent automatically when the page loads
-        window.location.href = "intent://www.youtube.com/#Intent;scheme=https;package=com.google.android.youtube;end";
+        // Automatically try to open LibreTube on page load
+        window.location.href = "intent://#Intent;scheme=https;package=io.libretube.app;end";
     };
 </script>
 
